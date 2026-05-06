@@ -1,0 +1,52 @@
+﻿@prefix ex: <http://example.org/> .
+@prefix shds: <https://w3id.org/shacl-ds#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+ex:shapeGraphASK shds:targetGraph shds:default.
+ex:shapeGraphASK {
+
+ex: sh:declare [
+		sh:prefix "ex" ;
+		sh:namespace "http://example.org/"^^xsd:anyURI ;
+	] ;
+
+	sh:declare [
+		sh:prefix "foaf" ;
+		sh:namespace "http://xmlns.com/foaf/0.1/"^^xsd:anyURI ;
+	] ;
+.
+
+ex:knowsAtleastAPersonAndMustBeFromGoodPersonShape
+	rdf:type sh:NodeShape ;
+	sh:targetClass foaf:Person ;
+	ex:goodPersonGraphName ex:goodPersonGraph;
+.
+
+ex:knowsAtleastAPersonAndMustBeFromGoodPersonShape
+  a sh:ConstraintComponent ;
+  sh:parameter [
+      sh:path ex:goodPersonGraphName ;
+	  sh:name "good person graph name";
+    ] ;
+  sh:validator [
+		a sh:SPARQLAskValidator ;
+		sh:prefixes ex:;
+		sh:ask """
+			ASK {
+				$this a foaf:Person ;
+					foaf:knows ?someone .
+				FILTER EXISTS {
+					GRAPH $goodPersonGraphName {
+						?someone a foaf:Person .
+					}
+					$this foaf:knows ?someone .
+				}
+			}
+			""" ;
+  	]	
+.
+}

@@ -1,0 +1,13 @@
+# By default, normalize line endings
+* text=auto
+
+# Force microsoft files to use CRLF
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+*.{reg,[rR][eE][gG]} text eol=crlf
+
+# Force Unix bash files to use LF
+*.sh text eol=lf
+
+# Mark Jelly files as binary
+*.jelly binary

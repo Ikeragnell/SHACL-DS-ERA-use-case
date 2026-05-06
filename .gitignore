@@ -1,0 +1,11 @@
+# Build output
+TopbraidProcessor/target/
+benchmark/target/
+
+# Large dataset — download via data/download-dataset.sh
+data/RINF-dump-20260217.nq
+data/RINF-dump-20260217.zip
+
+# Benchmark output
+bench-output/
+results/
