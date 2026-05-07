@@ -104,7 +104,7 @@ java -Xmx40g -jar jars\benchmark.jar ^
 >
 > **Runtime warning:** Each validation run per configuration takes approximately **10 minutes**
 > on the full ERA/RINF dataset. With the default settings (1 warmup + 10 measured rounds,
-> 6 configurations), the complete execution takes **over 18 hours**. Use `--warmup 0 --measure 1 --shacl-ds-tg data/SHACL-DS-TARGET.trig`
+> 6 configurations), the complete execution takes **over 10 hours**. Use `--warmup 0 --measure 1 --shacl-ds-tg data/SHACL-DS-TARGET.trig`
 > for a quick smoke test.
 
 ### Arguments
